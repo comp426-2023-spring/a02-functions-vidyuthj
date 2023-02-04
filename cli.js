@@ -46,7 +46,7 @@ else if(argv.e) {
 var lat_long_present = ((lat_north && long_east) || (lat_north && long_west) || (lat_south && long_west) || (lat_south && long_east));
 
 if(!lat_long_present) {
-    console.log("Lat & Long must be present and in range");
+    console.log("Latitude must be in range");
     process.exit(0);
 }
 var response;
