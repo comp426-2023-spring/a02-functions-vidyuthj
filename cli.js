@@ -75,4 +75,34 @@ if(args.j) {
     process.exit(0);
 }
 
+const num_days = args.d;
+
+if(num_days == 0) {
+    var certain_day = "today.";
+}
+else if(days > 1) {
+    var certain_day = "in " + num_days + " days.";
+}
+else {
+    var certain_day = "tomorrow.";
+}
+
+if(num_days && num_days != 1) {
+    var rain_forecast = requested_data.daily.precipitation_hours[num_days];
+    if(rain_forecast == 0) {
+        console.log("You probably won't need your galoshes" + certain_day);
+    }
+    else {
+        console.log("You might want to be your galoshes" + certain_day);
+    }
+}
+else {
+    var rain_forecast = requested_data.daily.precipitation_hours[1];
+    if(rain_forecast == 0) {
+        console.log("You probably won't need your galoshes" + certain_day);
+    }
+    else {
+        console.log("You might want to be your galoshes" + certain_day);
+    }
+}
 
