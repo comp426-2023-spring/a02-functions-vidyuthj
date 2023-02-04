@@ -80,7 +80,7 @@ const num_days = args.d;
 if(num_days == 0) {
     var certain_day = "today.";
 }
-else if(days > 1) {
+else if(num_days > 1) {
     var certain_day = "in " + num_days + " days.";
 }
 else {
