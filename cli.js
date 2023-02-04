@@ -68,7 +68,7 @@ else if(args.s && args.w) {
 }
 
 
-const requested_data = await response.json();
+const requested_data = await result.json();
 
 if(args.j) {
     console.log(requested_data);
