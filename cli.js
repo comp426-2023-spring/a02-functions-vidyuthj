@@ -26,47 +26,23 @@ else {
 }
 
 //Lat and Long Requirements
-
-// Convert Latitude
+var lat;
+var long;
 if(argv.n) {
-    var lat_north = Math.round((argv.n + Number.EPSILON) *100) / 100;
+    lat = argv.n;
 }
-else if(argv.s) {
-    var lat_south = Math.round((argv.s + Number.EPSILON) *100) / 100;
-}
-
-// Convert Longitude
-if(argv.w) {
-    var long_west = Math.round((argv.w + Number.EPSILON) *100) / 100;
-}
-else if(argv.e) {
-    var long_east = Math.round((argv.e + Number.EPSILON) *100) / 100;
+else {
+   lat = (argv.s * -1);
 }
 
-var lat_long_present = ((lat_north && long_east) || (lat_north && long_west) || (lat_south && long_west) || (lat_south && long_east));
-
-if(!lat_long_present) {
-    console.log("Latitude must be in range");
-    process.exit(0);
+if(argv.e) {
+    long = argv.e;
 }
-var response;
-if(argv.n && argv.w) {
-   var result= await fetch("https://api.open-meteo.com/v1/forecast?latitude=" + lat_north + "&longitude=" + long_west + "&timezone=" + current_timezone + "&daily=precipitation_hours");
-
-}
-else if(argv.n && argv.e) {
-    var result = await fetch("https://api.open-meteo.com/v1/forecast?latitude=" + lat_north + "&longitude=" + long_east + "&timezone=" + current_timezone + "&daily=precipitation_hours");
-
-}
-else if(argv.s && argv.e) {
-    var result = await fetch("https://api.open-meteo.com/v1/forecast?latitude=" + lat_south + "&longitude=" + long_east + "&timezone=" + current_timezone + "&daily=precipitation_hours");
-
-}
-else if(argv.s && argv.w) {
-    var result = await fetch("https://api.open-meteo.com/v1/forecast?latitude=" + lat_south + "&longitude=" + long_west + "&timezone=" + current_timezone + "&daily=precipitation_hours");
-
+else {
+   long = (argv.w * -1);
 }
 
+var result= await fetch("https://api.open-meteo.com/v1/forecast?latitude=" + lat + "&longitude=" + long + "&timezone=" + current_timezone + "&daily=precipitation_hours");
 
 const requested_data = await result.json();
 
@@ -105,3 +81,5 @@ else {
         console.log("You might want to be your galoshes" + certain_day);
     }
 }
+
+
